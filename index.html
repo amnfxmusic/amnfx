@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amnfx</title>
+    <link rel="icon" type="image/x-icon" href="siteimg/fav/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="siteimg/fav/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="siteimg/fav/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="siteimg/fav/apple-touch-icon.png">
+<link rel="manifest" href="siteimg/fav/site.webmanifest">
+
+    <style>
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none !important;
+            color: white;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* Central Container */
+        .container {
+            width: 320px;
+            padding: 20px 0 60px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Placeholders for icons/images */
+.logo {
+
+    width:80px;
+    height: 80px;
+    margin-left:-12px;
+}
+.logo2 {
+    width:42px;
+    height: 42px;
+    margin-top: 3px;
+}
+
+        .placeholder {
+            border-radius: 100%;
+            background-clip: content-box;
+            padding: 2px;
+            display: inline-block;
+            display: flex;
+    justify-content: center;
+    align-items: center;
+        }
+        
+        .placeholder.lg { width: 48px; height: 48px; }
+        .placeholder.md { width: 64px; height: 64px;  background: rgba(0, 0, 0, 0.5); border:none;}
+        .placeholder.md2 { width: 28px; height: 28px;  }
+        .placeholder.sm { width: 36px; height: 36px; background: #000; border:none; }
+        .placeholder.sm img { position: center; }
+        .placeholder.sm2 { width: 24px; height: 24px; background: #1E1E1E; border:none;}
+
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 4px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            color: #9A9A9A;
+            font-weight: 400;
+            text-align: right;
+        }
+
+        .page-title {
+            font-size: 16pt;
+            line-height: 1.4;
+ 
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .header-span {
+font-size: 18pt;
+margin: 10px 0 10px 10px;
+        }
+
+.modal-body span { margin-left:10px; }
+
+        /* Main Feed Layout */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Exact margin between blocks on mobile */
+            margin-bottom: 20px;
+        }
+
+        /* Media Cards (Vertical content like "latest video") */
+        .media-card {
+            background-color: #181818;
+            border-radius: 42px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .media-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #9A9A9A;
+            padding: 0 4px;
+        }
+
+        .media-thumbnail {
+            background-color: #000;
+            border-radius: 80px;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .media-thumbnail.featured {
+            background-image: url(siteimg/int.jpg);
+            background-size: 110%;
+transition: 0.3s ease;
+            background-position: center;
+        }
+         .media-thumbnail.featured:hover {
+            background-image: url(siteimg/int.jpg);
+            background-size: 120%;
+            background-position: center;
+            transition: 0.3s ease;
+        }
+        .media-thumbnail.video {
+            background-image: url(siteimg/video.jpg);
+            background-size: 110%;
+transition: 0.3s ease;
+            background-position: center;
+        }
+         .media-thumbnail.video:hover {
+            background-image: url(siteimg/video.jpg);
+            background-size: 120%;
+            background-position: center;
+            transition: 0.3s ease;
+        }
+        .media-thumbnail.mix {
+            background-image: url(siteimg/mix.png);
+            background-size: 110%;
+transition: 0.3s ease;
+            background-position: center;
+        }
+         .media-thumbnail.mix:hover {
+            background-image: url(siteimg/mix.png);
+            background-size: 120%;
+            background-position: center;
+            transition: 0.3s ease;
+        }
+         .media-thumbnail2.release {
+            background-image: url(siteimg/release.jpg);
+            background-size: 110%;
+transition: 0.3s ease;
+            background-position: center;
+        }
+         .media-thumbnail2.release:hover {
+            background-image: url(siteimg/release.jpg);
+            background-size: 120%;
+            background-position: center;
+            transition: 0.3s ease;
+        }
+
+        .media-thumbnail2 {
+            background-color: #000;
+            border-radius: 80px;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .media-info {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .media-title {
+            font-size: 14pt;
+            font-weight: 400;
+            color: #fff;
+        }
+        .media-title a { color:#fff; }
+
+        .media-subtitle {
+            font-size: 12px;
+            color: #9A9A9A;
+            text-transform: uppercase;
+        }
+
+        .media-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Pill Buttons inside Media Cards */
+        .pill-btn {
+            background-color: #272727;
+            border-radius: 100px;
+            padding: 14px 16px 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            color: #ccc;
+            font-size: 15px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .pill-btn span {
+            text-align: left;
+            max-width: 70%;
+        }
+
+        .pill-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        /* Pill Cards (Matches index.html right-aligned layout) */
+        .pill-card {
+            background-color: #181818;
+            border-radius: 42px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pill-card:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .pill-card-graphic {
+            width: 56px;
+            height: 56px;
+            border-radius: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .pill-card-text {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-right: 8px;
+        }
+        .pill-card-no {
+            display: none;
+        }
+
+        .pill-card-title {
+            font-size: 14pt;
+            font-weight: 400;
+            color: #fff;
+        }
+
+        .pill-card-subtitle {
+            font-size: 12px;
+            color: #9A9A9A;
+        }
+
+        /* Follow Section */
+        .follow-section {
+            background-color: #181818;
+            border-radius: 42px;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .follow-header {
+            text-align: center;
+            font-size: 18px;
+            color: #9A9A9A;
+            margin-bottom: 20px;
+        }
+
+        .follow-item {
+            background-color: #272727;
+            border-radius: 100px;
+            padding: 14px 16px 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px !important;
+            color: #ccc;
+            font-size: 15px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .follow-item2 {
+            background-color: #272727;
+            border-radius: 100px;
+            padding: 14px 16px 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ccc;
+            font-size: 15px;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .follow-item:hover, .follow-item2:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: #9A9A9A;
+            font-size: 12px;
+        }
+
+        /* Modals / Popups */
+        .modal-overlay {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+    visibility: visible;
+        }
+
+        .modal-content {
+            background-color: #181818;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 32px;
+            padding: 24px 16px;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+        }
+
+.modal-overlay.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #9A9A9A;
+            font-size: 14px;
+            margin-bottom: 24px;
+            padding: 0 10px;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* =========================================
+           Desktop Adaptation (min-width: 768px)
+           ========================================= */
+        @media (min-width: 768px) {
+            .container {
+                width: 90%;
+                max-width: 1100px;
+                padding: 60px 0 80px 0;
+            }
+
+            .media-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+            main {
+                /* Switched to Multi-column Masonry Layout */
+                display: block; 
+                column-count: 2;
+                column-gap: 24px; 
+            }
+
+            .media-card, .pill-card {
+                /* Allow natural height instead of stretching */
+                height: auto;
+                
+                /* Margin replaces grid gap for vertical spacing */
+                margin-bottom: 24px; 
+                
+                /* Prevent items from breaking/splitting across columns */
+                break-inside: avoid;
+                -webkit-column-break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .follow-section {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .follow-header {
+                grid-column: 1 / -1;
+                margin-top: 20px;
+            }
+
+            .follow-item, .follow-item2 {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        /* Expand to 3 columns on larger screens */
+        @media (min-width: 1024px) {
+            main {
+                column-count: 3;
+            }
+            .follow-section {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="logo"><img src="siteimg/logo.png"   class="logo" /></div>
+            <div class="header-title">amnfx</div>
+        </header>
+
+        <div class="page-title">
+            turning signals into music<br>amen 2 fx
+        </div>
+
+        <main>
+            <div class="media-card">
+                <div class="media-header">
+                    <span>latest video</span>
+                    <div class="placeholder sm2"><img src="siteimg/eye1.svg" /></div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=e40dfGEkwe8" target="blank"><div class="media-thumbnail video">
+                    <div class="placeholder md"><img src="siteimg/eye.svg" /></div>
+                </div></a>
+                <div class="media-info">
+                    <div class="media-title"><a href="https://www.youtube.com/watch?v=e40dfGEkwe8" target="blank">hybrid set</a></div>
+                    <div class="media-subtitle">NOH RADIO • 2025</div>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-header">
+                    <span>latest mix</span>
+                    <div class="placeholder sm2"><img src="siteimg/sound.svg" /></div>
+                </div>
+                <a href="https://soundcloud.com/amnfx/chaoticmix" target="blank"><div class="media-thumbnail mix">
+                    <div class="placeholder md"><img src="siteimg/play.svg" /></div>
+                </div></a>
+                <div class="media-info">
+                    <div class="media-title"><a href="https://soundcloud.com/amnfx/chaoticmix" target="blank">chaotic hearts mix</a></div>
+                    <div class="media-subtitle">self-published • 2019</div>
+                </div>
+                <div class="media-actions">
+                    <a href="https://soundcloud.com/amnfx/chaoticmix" target="blank"><button class="pill-btn">
+                        <span>listen now</span>
+                        <div class="placeholder sm"><img src="siteimg/play.svg" width="18px" height="18px"></div>
+                    </button></a>
+                    <a href="https://soundcloud.com/amnfx/sets/mixes" target="blank"><button class="pill-btn">
+                        <span>more mixes</span>
+                        <div class="placeholder sm"><img src="siteimg/play.svg" width="18px" height="18px"></div>
+                    </button></a>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-header">
+                    <span>latest release</span>
+                    <div class="placeholder sm2"><img src="siteimg/sound.svg" /></div>
+                </div>
+                <a href="https://amnfx.bandcamp.com/album/menefx"><div class="media-thumbnail2 release">
+                    <div class="placeholder md"><img src="siteimg/play.svg" /></div>
+                </div></a>
+                <div class="media-info">
+                    <div class="media-title"><a href="https://amnfx.bandcamp.com/album/menefx">[æmenefx]</a></div>
+                    <div class="media-subtitle">Firering • 2020</div>
+                </div>
+                <div class="media-actions">
+                    <a href="https://open.spotify.com/album/2iXqedvFcPpdgvGTGcb3wN" target="blank"><button class="pill-btn">
+                        <span>spotify</span>
+                        <div class="placeholder sm"><img src="siteimg/spotify.svg" width="18px" height="18px" /></div>
+                    </button></a>
+                    <a href="https://music.apple.com/us/album/amnfx/1524047256" target="blank"><button class="pill-btn">
+                        <span>apple music</span>
+                        <div class="placeholder sm"><img src="siteimg/applem.svg" /></div>
+                    </button></a>
+                    <a href="https://www.youtube.com/watch?v=3Ccsjmyvi5A&list=OLAK5uy_meCyAqq6HQxBUnTU65QWRwyWGwYbi284g" target="blank"><button class="pill-btn">
+                        <span>youtube</span>
+                        <div class="placeholder sm"><img src="siteimg/icon-yt.svg" /></div>
+                    </button></a>
+                    <a href="https://amnfx.bandcamp.com/album/menefx" target="blank"><button class="pill-btn">
+                        <span>bandcamp</span>
+                        <div class="placeholder sm"><img src="siteimg/icon-bc.svg" /></div>
+                    </button></a>
+                </div>
+            </div>
+
+            <a href="https://amnfx.bandcamp.com/" target="blank"><div class="pill-card">
+                <div class="pill-card-graphic">
+                    <div><img src="siteimg/logo.png" class="logo2" /></div>
+                </div>
+                <div class="pill-card-text">
+                    <div class="pill-card-title">amnfx releases</div>
+                    <div class="pill-card-subtitle">explore ></div>
+                </div>
+            </div></a>
+
+            <div class="media-card">
+                <div class="media-header">
+                    <span>featured interview</span>
+                    <div class="placeholder sm2"><img src="siteimg/eye1.svg" /></div>
+                </div>
+                <a href="https://mookidmusic.com/2019/05/17/cause-and-effects-an-interview-with-amnfx/" target="blank"><div class="media-thumbnail featured">
+                    <div class="placeholder md"><img src="siteimg/eye.svg" /></div>
+                </div></a>
+                <div class="media-info">
+                    <div class="media-title"><a href="https://mookidmusic.com/2019/05/17/cause-and-effects-an-interview-with-amnfx/" target="blank">Cause and effects</a></div>
+                    <div class="media-subtitle">UK • 2019</div>
+                </div>
+                <div class="media-actions">
+                    <a href="https://mookidmusic.com/2019/05/17/cause-and-effects-an-interview-with-amnfx/" target="blank"><button class="pill-btn">
+                        <span>read now</span>
+                        <div class="placeholder sm"><img src="siteimg/eye.svg" width="18px" height="18px" /></div>
+                    </button></a>
+                    <button class="pill-btn" onclick="openModal('interviews-modal')">
+                        <span>more interviews</span>
+                        <div class="placeholder sm"><img src="siteimg/int.svg" width="18px" height="18px" /></div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="pill-card" onclick="openModal('listen-modal')">
+                <div class="pill-card-graphic">
+                    <div class="placeholder md2"><img src="siteimg/play.svg" width="24px" height="24px" /></div>
+                </div>
+                <div class="pill-card-text">
+                    <div class="pill-card-title">listen 2 amnfx</div>
+                    <div class="pill-card-subtitle">via streaming ></div>
+                </div>
+            </div>
+
+            <div class="pill-card" onclick="openModal('list-modal')">
+                <div class="pill-card-graphic">
+                    <div class="placeholder md2"><img src="siteimg/int.svg" width="24px" height="24px" /></div>
+                </div>
+                <div class="pill-card-text">
+                    <div class="pill-card-title">list of  appearances</div>
+                    <div class="pill-card-subtitle">open ></div>
+                </div>
+            </div>
+        </main>
+
+        <section class="follow-section">
+            <div class="follow-header">follow</div>
+            
+            <a href="https://instagram.com/amnfx" target="blank"><div class="follow-item">
+                <span>Instagram</span>
+                <div class="placeholder sm"><img src="siteimg/icon-ig.svg" /></div>
+            </div></a>
+            <a href="https://threads.com/amnfx" target="blank"><div class="follow-item">
+                <span>threads</span>
+                <div class="placeholder sm"><img src="siteimg/icon-th.svg" /></div>
+            </div></a>
+            <a href="https://t.me/amnfx" target="blank"><div class="follow-item">
+                <span>telegram</span>
+                <div class="placeholder sm"><img src="siteimg/icon-tg.svg" /></div>
+            </div></a>
+            <a href="https://facebook.com/amnfx" target="blank"><div class="follow-item">
+                <span>facebook</span>
+                <div class="placeholder sm"><img src="siteimg/icon-fb.svg" /></div>
+            </div></a>
+            <a href="https://ra.co/dj/amnfx" target="blank"><div class="follow-item">
+                <span>resident advisor</span>
+                <div class="placeholder sm">RA</div>
+            </div></a>
+            <a href="https://soundcloud.com/amnfx" target="blank"><div class="follow-item2">
+                <span>soundcloud</span>
+                <div class="placeholder sm"><img src="siteimg/icon-sc.svg" /></div>
+            </div></a>
+        </section>
+
+        <footer>
+            <span>part of <a href="https://frng.net/">frng.net</span></a>
+            <div class="placeholder sm"><img src="siteimg/frng.png" width="42px" height="42px" /></div>
+        </footer>
+
+    </div>
+
+    <div class="modal-overlay" id="interviews-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>read amnfx interviews</span>
+                <button class="close-btn" onclick="closeModal('interviews-modal')">
+                    <div class="placeholder sm2"><img src="siteimg/close.svg" /></div>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a href="https://theletter.co.uk/amnfx-modern-life" target="blank"><button class="pill-btn"><span>Modern Life album review by The Letter UK, 2019</span><div class="placeholder sm"><img src="siteimg/int.svg" width="18px" height="18px" /></div></button></a>
+                <a href="https://titel-kulturmagazin.net/2017/03/18/from-moscow-with-beats-an-interview-with-amnfx/" target="blank"><button class="pill-btn"><span>Interview by TITEL-Kulturmagazin, 2017</span><div class="placeholder sm"><img src="siteimg/int.svg" width="18px" height="18px" /></div></button></a>
+                <a href="https://inverted-audio.com/premiere-amnfx-we-got-it-ive-been-saving-up-all-day/" target="blank"><button class="pill-btn"><span>Track premiere by Inverted Audio, 2017</span><div class="placeholder sm"><img src="siteimg/int.svg" width="18px" height="18px" /></div></button></a>
+                <a href="https://theletter.co.uk/amnfx-moscow-beat" target="blank"><button class="pill-btn"><span>Moscow Beat album review by The Letter UK, 2019</span><div class="placeholder sm"><img src="siteimg/int.svg" width="18px" height="18px" /></div></button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="listen-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>stream amnfx music</span>
+                <button class="close-btn" onclick="closeModal('listen-modal')">
+                    <div class="placeholder sm2"><img src="siteimg/close.svg" /></div>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a href="https://amnfx.bandcamp.com/" target="blank"><button class="pill-btn"><span>bandcamp</span><div class="placeholder sm"><img src="siteimg/icon-bc.svg" /></div></button></a>
+                <a href="https://open.spotify.com/artist/1rfr9Z9TT2Pi23MROKn6xf" target="blank"><button class="pill-btn"><span>spotify</span><div class="placeholder sm"><img src="siteimg/spotify.svg" /></div></button></a>
+                <a href="https://music.apple.com/us/artist/%C3%A5mnfx/1115304451" target="blank"><button class="pill-btn"><span>apple music</span><div class="placeholder sm"><img src="siteimg/applem.svg" /></div></button></a>
+                <a href="https://www.deezer.com/en/artist/11932151" target="blank"><button class="pill-btn"><span>deezer</span><div class="placeholder sm"><img src="siteimg/deezer.svg" width="18px" height="18px" /></div></button></a>
+                <a href="https://soundcloud.com/amnfx" target="blank"><button class="pill-btn"><span>soundcloud</span><div class="placeholder sm"><img src="siteimg/icon-sc.svg" /></div></button></a>
+                <a href="https://mixcloud.com/amnfx" target="blank"><button class="pill-btn"><span>mixcloud</span><div class="placeholder sm"><img src="siteimg/mixcl.svg" /></div></button></a>
+                <a href="https://www.youtube.com/channel/UCWf51P4P6JZQagGQyTGIt_g" target="blank"><button class="pill-btn"><span>youtube</span><div class="placeholder sm"><img src="siteimg/icon-yt.svg" /></div></button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="list-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>list of appearances</span>
+                <button class="close-btn" onclick="closeModal('list-modal')">
+                    <div class="placeholder sm2"><img src="siteimg/close.svg" /></div>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="header-span">released music:</span>
+    <span>Amnfx — 2020</span>
+    <span>Fear Of — 2020</span>
+    <span>Audrey — 2020</span>
+    <span>Trance Music Express — 2020</span>
+    <span>Nastroyeniya — 2020</span>
+    <span>Pray — 2020</span>
+    <span>Creatures Vol. 1 – 2020</span>
+    <span>Soundworks.Remixes — 2019</span>
+    <span>This Is Not The End — 2019</span>
+    <span>Modern Life — 2019</span>
+    <span>Lubov' (Love) – Track – NV020 — 2019</span>
+    <span>Tears track – Track – NDFT002 — 2018</span>
+    <span>Dancefloor Cuts Vol. 1 — 2018</span>
+    <span>Moscow Beat – SILK098 — Album — 2017</span>
+    <span>Soundworks — EP — 2017</span>
+    <span>Missing You – Track — 2017</span>
+    <span>Diffusion (Saw You Again) – Track – LL004 — 2017</span>
+    <span>Don't Take It, Heavy Eight – Tracks – Tutamen — 2017</span>
+    <span>Possible Deviations – Track – MDM H — 2017</span>
+    <span>Vision One — Album — 2016</span>
+    <span>ARP6 – Track – Dirty Tapes X СИСТЕМА — 2016</span>
+    <span>Trevo – Track – NVS01 — 2016</span>
+    <span>Please Do It Gently – Track – Opal Tapes — 2016</span>
+    <span>It Was Then – Track – 1221 — 2016</span>
+    <span>Rave – NV004 — EP — 2015</span>
+
+    <span class="header-span">mixes:</span>
+    <span>2018/07/04 – Making Waves Underground</span>
+    <span>2018/05/09 – Rinse FM France</span>
+    <span>2018/03/20 – Self-Titled Magazine</span>
+    <span>2017/11/14 – Krossfingers</span>
+    <span>2017/05/04 – Stoscha</span>
+    <span>2016/12/21– Leisure Link</span>
+    <span>2016/07/27 – Bizaarbazaar</span>
+    <span>2016/01/26 – Hypnotic Groove</span>
+    <span>2015/11/19 – Dispatch Agency</span>
+    <span>2015/11/02 – Lazy&Crazy</span>
+    <span>2015/09/11 – Система</span>
+                <span class="header-span">radio performances & appearances:</span>
+    <span>2025/11/16 – NOH radio (hybrid live set)</span>
+    <span>2022/11/01 – NOH radio (hybrid live set)</span>
+    <span>2018/09/22 – TEST FM (guest mix)</span>
+    <span>2018/05/09 – Azamat B. – Rinse France (guest mix)</span>
+    <span>2017/11/12 – Fine Grains, Radar Radio (playlist)</span>
+    <span>2017/09/26 – Departures Records, Internet Public Radio</span>
+    <span>2017/09/21 – Monotronique, Radar Radio (playlist)</span>
+    <span>2017/04/04 – Trevor Jackson, NTS Radio (playlist)</span>
+    <span>2017/03/01 – Tom Ravenscroft's 6 Music Recommends, BBC6 (playlist)</span>
+    <span>2017/02/14 – Strahinja Arbutina, Hodge, Rinse FM (playlist)</span>
+    <span>2016/09/06 – Jabes, Radar Radio (playlist)</span>
+    <span>2016/09/01 – Gost Zvuk, Megapolis FM (playlist)</span>
+    <span>2016/08/25 – Resonance, Megapolis FM</span>
+    <span>2016/04/14 – Gost Zvuk, Megapolis FM (playlist)</span>
+    <span>2016/02/16 – Mamiko Motto, NTS Radio (playlist)</span>
+    <span>2016/03/17 – Gost Zvuk, Megapolis FM (playlist)</span>
+    <span>2016/01/28 – Neo Violence, Radio Punktum</span>
+    <span>2016/01/08 – Powerplant, Radar Radio</span>
+    <span>2015/12/10 – Realitycheck, Rinse FM France (playlist)</span>
+    <span>2015/11/11 – Loose Lips, Hoxton FM (playlist)</span>
+    <span>2015/11/02 – Jesse Sappell, RWD FM (playlist)</span>
+    <span>2015/08/22 – Resonance, Megapolis FM (playlist)</span>
+
+    <span class="header-span">live performances:</span>
+    <span>2025/11/16 – NOH radio (hybrid live set)</span>
+    <span>2022/11/01 – NOH radio (hybrid live set)</span>
+    <span>2019/03/30 – Tallin Music Week, Estonia LIVE</span>
+    <span>2018/09/21 – ANNOY – Mosaique, Saint-Petersburg (RU) LIVE</span>
+    <span>2017/08/25 – Synthposium, Winzavod, Moscow LIVE</span>
+    <span>2017/04/21 – RTS.FM x Compromat – Brusov Ship, Moscow (RU) LIVE</span>
+    <span>2016/09/30 – T&K x RTS FM – Konstruktor, Moscow (RU) LIVE</span>
+    <span>2016/08/26 – Warehouse – Propaganda, Moscow (RU) LIVE</span>
+    <span>2016/07/09 – 5 years – ypsilon, Moscow (RU) LIVE</span>
+    <span>2016/06/25 – PREMETEEVE – BUNKR, Moscow (RU) LIVE</span>
+    <span>2016/06/09 – RTS FM, Rodnya, Moscow LIVE</span>
+
+    <span class="header-span">dj performances:</span>
+    <span>2019/08/29 – drama bar, tbilisi (GE)</span>
+    <span>2019/05/30 – Pluton (RU)</span>
+    <span>2019/03/29 – Puant Bookstore, Tallinn Music Week (EE)</span>
+    <span>2019/02/16 – Vy Vidite Lubov (You See The Love) – Dom Kultur, Moscow (RU)</span>
+    <span>2018/12/29 – Raw Christmas Party – SMENA, Moscow (RU)</span>
+    <span>2018/09/22 – TEST FM, Saint-Petersburg (RU)</span>
+    <span>2017/12/09 – Dissonance – Modul, Moscow (RU)</span>
+    <span>2017/09/16 – VAULT – Avangarden, Moscow (RU)</span>
+    <span>2017/07/01 – FERAL – Squat 3/4, Moscow (RU)</span>
+    <span>2017/05/27 – РИТМ – NII, Moscow (RU)</span>
+    <span>2017/03/17 – NOCH #1: bordering tundra w/ åmnfx – Titanic, Vienna (AU)</span>
+    <span>2017/03/11 – We Are 138 x Mmodemm – Zentralcafe K4, Nurnberg (DE)</span>
+    <span>2017/03/10 – MMODEMM Label Night – Sameheads, Berlin (DE)</span>
+    <span>2017/03/04 – ⭔ K L U B ⭔ – PRACHT, Leipzig (DE)</span>
+    <span>2017/03/03 – MMODEMM NIGHT – KOZ, Frankfurt-am-Main (DE)</span>
+    <span>2016/10/14 – UNIT – Rodnya, Moscow (RU) live</span>
+    <span>2016/09/23 – Sumeba Miyako – Stackenschneider, Saint-Petersburg (RU)</span>
+    <span>2016/07/30 – Opal Tapes x Hyperboloid – krugozor, Moscow (RU)</span>
+    <span>2016/06/24 – CULT – SMENA, Moscow (RU)</span>
+    <span>2016/05/27 – WALKING CASTLE – AVANGARDEN, Moscow (RU)</span>
+    <span>2016/05/02 – LOWKEY – SMENA, Moscow (RU)</span>
+    <span>2016/05/01 – UNIT – RODNYA, Moscow (RU)</span>
+    <span>2016/03/19 – UNIT – RODNYA, Moscow (RU)</span>
+    <span>2016/03/05 – HELP – NII, Moscow (RU)</span>
+    <span>2016/02/05 – PRESHES – DICH, Moscow (RU)</span>
+    <span>2016/01/30 – PRESHES – MOD, Saint-Petersburg (RU)</span>
+    <span>2016/01/01 – PRESHES – SMENA, Moscow (RU)</span>
+    <span>2015/12/18 – UNIT – RODNYA, Moscow (RU)</span>
+    <span>2015/11/28 – LAVALAVA NIGHT – CORVIN, Budapest (HU)</span>
+    <span>2015/10/24 – ZDDZ AFTERPARTY – NII, Moscow (RU)</span>
+    <span>2015/09/27 – BAL ZNANIY-2 – NII, Moscow (RU)</span>
+    <span>2015/09/18 – UNIT – RODNYA, Moscow (RU)</span>
+    <span>2015/08/01 – ENDLESS SUMMER – ARTPLAY, Moscow (RU)</span>
+    <span>2015/07/17 – KORIDOR – FLACON, Moscow (RU)</span>
+    <span>2015/06/27 – BAL ZNANIY – NII, Moscow (RU)</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal-overlay');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
